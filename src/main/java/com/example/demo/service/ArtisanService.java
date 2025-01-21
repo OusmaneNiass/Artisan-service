@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Entity.Artisan;
+import com.example.demo.Entity.DemandeRendezVous;
 import com.example.demo.Repository.ArtisanRepository;
 
 @Service
@@ -45,5 +46,13 @@ public class ArtisanService {
     public void deleteArtisan(Long id) {
         Artisan artisan = artisanRepository.findById(id).orElseThrow(() -> new RuntimeException("Artisan non trouvé"));
         artisanRepository.delete(artisan);
+    }
+    
+    public void creerDemande(Long artisanId, DemandeRendezVous demande) {
+        Artisan artisan = artisanRepository.findById(artisanId)
+                            .orElseThrow(() -> new RuntimeException("Artisan non trouvé"));
+
+        // Ajouter la logique pour enregistrer ou traiter la demande
+        System.out.println("Demande reçue pour l'artisan " + artisan.getNom() + " : " + demande.getMessage());
     }
 }
